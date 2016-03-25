@@ -4,31 +4,50 @@ import ReactDOM from 'react-dom';
 class App extends React.Component {
 	constructor(){
 		super();
-		this.state = { text : 'this is a text'}
+		this.state = {
+			red: 0,
+			green: 0,
+			blue: 0
+		}
 		this.update = this.update.bind(this)
 	}
 	update(e){
-		this.setState({text: e.target.value})
+		this.setState({
+			red: ReactDOM.findDOMNode(this.refs.red.refs.inp).value,
+			green: ReactDOM.findDOMNode(this.refs.green.refs.inp).value,
+			blue: ReactDOM.findDOMNode(this.refs.blue.refs.inp).value
+		})
 	}
 	render(){
 		return (
 			<div>
-				<Widget text={this.state.text} update={this.update} />
+				<Slider ref="red" update={this.update} />
+				{this.state.red}
+				<br/>
+				<Slider ref="green" update={this.update} />
+				{this.state.green}
+				<br/>
+				<Slider ref="blue" update={this.update} />
+				{this.state.blue}
+				<br/>
 			</div>
 		)
 	}
 }
 
-//Stateless Component
-const Widget = (props) => {
+class Slider extends React.Component{
+	render(){
 		return (
 			<div>
-				<input type="text"
-					onChange={props.update}
+				<input ref="inp" type="range"
+					min="0"
+					max="255"
+					onChange={this.props.update}
 					/>
-				<h1>{props.text}</h1>
 			</div>
 		)
+	}
 }
+
 
 ReactDOM.render(<App/>, document.getElementById('app'))
