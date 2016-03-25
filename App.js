@@ -8,6 +8,7 @@ import ReactDOM from 'react-dom';
 
 // Component always need a single element to render
 
+//a Stateless component
 //const App = () => <h1>Nice React ES6</h1>
 
 class App extends React.Component {
@@ -22,11 +23,12 @@ class App extends React.Component {
 	}
 }
 
+// This adds some type validation to your componets inputs like number or string validation.
 App.propTypes = {
 	text: React.PropTypes.string,
 	cat: React.PropTypes.number.isRequired,
 }
-
+// defaultProps adds a default text to the text prop I declared on my component
 App.defaultProps = {
 	text: 'This is default text'
 }
